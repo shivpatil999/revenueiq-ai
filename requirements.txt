@@ -7,3 +7,4 @@ pandas
 numpy
 joblib
 scikit-learn
+psycopg2-binary

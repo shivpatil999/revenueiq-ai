@@ -451,4 +451,31 @@ def sales_funnel():
 
     finally:
         db.close()
- 
+
+
+@app.get("/recent-leads")
+def recent_leads():
+
+    db = SessionLocal()
+
+    try:
+
+        leads = (
+            db.query(models.Lead)
+            .order_by(models.Lead.id.desc())
+            .limit(10)
+            .all()
+        )
+
+        return [
+            {
+                "company": lead.company_name,
+                "score": lead.score,
+                "value": lead.estimated_deal_value,
+                "region": lead.region
+            }
+            for lead in leads
+        ]
+
+    finally:
+        db.close()
