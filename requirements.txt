@@ -3,5 +3,7 @@ uvicorn[standard]
 sqlalchemy
 pydantic
 python-dotenv
+pandas
+numpy
 joblib
 scikit-learn
