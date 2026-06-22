@@ -7,7 +7,7 @@ from .database import SessionLocal
 
 from . import models
 from . import schemas
-
+from fastapi.middleware.cors import CORSMiddleware
 from .scoring import calculate_score
 from sqlalchemy import func
 models.Base.metadata.create_all(bind=engine)
@@ -16,7 +16,13 @@ app = FastAPI(
     title="RevenueIQ AI",
     version="1.0.0"
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
